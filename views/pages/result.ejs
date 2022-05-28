@@ -13,7 +13,7 @@
 
     <title>Pho2Song</title>
 </head>
-<body onload="getSong(0);highlightLink('main-feature')">
+<body onload="getSong();highlightLink('main-feature')">
 
     <%- include("../partials/navbar.ejs"); %> 
 
@@ -33,23 +33,17 @@
                                     <ul id="songsList" class="list-group list-group-flush justify-content-center align-items-center"> 
                                         <% var i=0 %>
                                         <% while(i<num){ %>
-                                            <div class="d-flex justify-content-center">
-                                                <div id="spin<%=i %>"  class="spinner-border" role="status"  style="display: none">
-                                                    <span class="visually-hidden">Loading...</span>
-                                                </div>
-                                            </div>
                                             <li id="li<%=i %>" class="list-group-item px-0" style="display: none;">
-                                                <div id="<%=i %>" class="row justify-content-center align-items-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <div id="spin<%=i %>"  class="spinner-border" role="status"  style="display: none">
+                                                        <span class="visually-hidden">Loading...</span>
+                                                    </div>
+                                                </div>
+                                                <div id="<%=i %>" class="row justify-content-center align-items-center"style="display: none;">
                                                     <div class="col-1 px-0">
                                                         <input class="form-check-input mt-0" name="songs" type="checkbox" id="check<%=i %>" value="" aria-label="<%=i %>" checked onclick='checkValid(this.id)'>
                                                     </div>
                                                 </div>
-                                                    
-                                                    <!-- <div id=<%=i %> class="row justify-content-center">
-                                                        
-                                                            <input class="form-check-input" name="songs" type="checkbox" id="check<%=i %>" value="" aria-label="<%=i %>">
-                                                        
-                                                    </div> -->
                                             </li>
                                         <%i++%>
                                         <%}; %>
@@ -182,6 +176,7 @@
 
     <!-- Local scripts -->
     <script src="./scripts/navbar_scripts.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="../scripts/main_results_scripts.js"></script>
     <script src="./scripts/back_to_top_of_page_script.js"></script>
 

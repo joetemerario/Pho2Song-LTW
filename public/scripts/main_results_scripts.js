@@ -1,32 +1,26 @@
-function getSong(id){
 
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("spin"+id).style.display="none"
+function getSong(){
+    let listItems= $('#songsList').children()
+    for (let id = 0; id < listItems.length; id++) {
+        $.get("/getSong", function(response,status) {
+           
+            $("#spin"+id).hide()
+            let embed = 'https://open.spotify.com/embed?uri=' +encodeURIComponent(response.uri)
+            let string='<div class="col-11 px-0"><iframe style="border-radius:12px" src="'+embed+ '" allowtransparency="true" width="280" height="80" frameBorder="0" allow="encrypted-media;"></iframe></div>'//<div class="ratio" style="--bs-aspect-ratio: 20%;"></div>';
             
-            if(this.responseText!='end') {
-                let response=JSON.parse(this.responseText)
-                let embed = 'https://open.spotify.com/embed?uri=' +encodeURIComponent(response.uri)
-                let string='<div class="col-11 px-0"><iframe style="border-radius:12px" src="'+embed+ '" allowtransparency="true" width="280" height="80" frameBorder="0" allow="encrypted-media;"></iframe></div>'//<div class="ratio" style="--bs-aspect-ratio: 20%;"></div>';
-                document.getElementById("text"+id).innerText=response.name;
-                document.getElementById(id).innerHTML+=string;
-                document.getElementById("li"+id).style.display="initial"
-                document.getElementById("check"+id).value = response.uri;
-                getSong(++id);
-            }
-
-            else {
-                document.getElementById("carouselExampleControls").style.display="initial"
-                document.getElementById("submit").style.display="initial"
-            }
-        }
-    };
-    document.getElementById("spin"+id).style.display="initial"
-    xmlhttp.open("GET", "getSong", true);
-    xmlhttp.send();
+            $("#text"+id).text(response.name)
+            
+            $("#"+id).html($("#"+id).html()+string);
+            $("#check"+id).attr("value",response.uri)
+            $("#"+id).show();
+        });
+        $("#spin"+id).show()
+        $("#li"+id).show()
+    }
+    $("#carouselExampleControls").show()
+    $("#submit").show()
 }
+
 
 function checkAll(){
     
