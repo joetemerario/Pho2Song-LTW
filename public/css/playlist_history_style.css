@@ -43,13 +43,6 @@ main {
     color: rgb(30, 215, 96);
 }
 
-/* .song-text{
-    display: inline-block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 60%;
-} */
-
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -69,57 +62,3 @@ main {
     }
 
 } 
-
-/* @media screen and (max-width: 320px){
-    .playlist-name{
-        max-width: 13ch;
-        text-overflow: ellipsis;
-    }
-    .playlist-description{
-        max-width: 13ch;
-        text-overflow: ellipsis;
-    }
-    .song-text{
-        display: inline-block;
-        max-width: 13ch;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    } 
-}
-
-@media screen and (max-width: 768px){
-    .playlist-name{
-       max-width: 25ch;
-        text-overflow: ellipsis;
-    }
-    .playlist-description{
-        max-width: 25ch;
-        text-overflow: ellipsis;
-    }
-    .song-text{
-        display: inline-block;
-        max-width: 25ch; 
-        
-        text-overflow: ellipsis;
-        overflow: hidden;
-    } 
-} */
-
-/* @media screen and (min-width: 1440px){
-    .playlist-name{
-       max-width: 25ch;
-        text-overflow: ellipsis;
-    }
-    .playlist-description{
-        max-width: 25ch;
-        text-overflow: ellipsis;
-    }
-    .song-text{
-        display: inline-block;
-        max-width: 50%; 
-        
-        text-overflow: ellipsis;
-        overflow: hidden;
-    } 
-}
- */
