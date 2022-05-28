@@ -540,7 +540,7 @@ app.get('/playlist_history', checkAuthenticated, (req, res) => {
 					username: req.session.user.name,
 					user_image: req.session.user.prof_pic
 				},
-				p2suser: req.session.user.id,
+				p2suser: req.session.user.name,
 				p2splaylists: data.data.rows
 				})
 			},
