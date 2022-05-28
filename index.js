@@ -326,13 +326,6 @@ async function work(userTasteInfo,userData) {
 }
 
 app.post('/result',upload.array("images", 50), checkAuthenticated, function (req, res) {
-	/* let spotifyApi=  new SpotifyWebApi({
-		clientId: spotify_client_id,
-		clientSecret: spotify_client_secret,
-	})
-	spotifyApi.setAccessToken(accessToken);
-	req.session.user.tastes=spotifyUtils.getUserTaste(spotifyApi) */
-	
 	userData.set(req.session.user.id,{
 		photos: Array(),
 		names: Array(),
@@ -344,7 +337,7 @@ app.post('/result',upload.array("images", 50), checkAuthenticated, function (req
 		user_image: req.session.user.prof_pic
 	}
 	
-	if (req.files) {//finito
+	if (req.files) {
 		userData.get(req.session.user.id).photos=req.files;
 		let photos=userData.get(req.session.user.id).photos
 		let names=userData.get(req.session.user.id).names
@@ -360,7 +353,7 @@ app.post('/result',upload.array("images", 50), checkAuthenticated, function (req
 		}
 		else res.redirect('/input');
 	}
-	else if (req.body.urls) {//finito
+	else if (req.body.urls) {
 		let photos=userData.get(req.session.user.id).photos
 		let names=userData.get(req.session.user.id).names
 		try{
@@ -422,14 +415,6 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 		}
 	})
 	
-	//songsDB è un array di obj di questo tipo
-	/* {
-		song:{
-			uri: 'spotify:track:<id della canzone>'
-			name: <nome della canzone>
-		}
-		photo: <nome foto>
-	} */
 	songsDB=songsDB.filter(songImg => selectedSongs.includes(songImg.song.uri)) // filtro le canzoni in base alle canzoni che l'utente ha selezionato
 
 
@@ -442,7 +427,7 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 			user: req.session.user.id,
 			description: req.body.description,			
 			song_number: req.body.songs.length,
-			songs: songsDB //penso qui possa andarci songsDB direttamente
+			songs: songsDB 
 		})
 	})
 	res.redirect('/')
@@ -458,11 +443,11 @@ app.get('/getSong',checkAuthenticated,async function (req, res) {
 			else{
 				let song
 				if(photo.path !== undefined){
-					song = await spotifyUtils.getSongFromColors(extractColors(photo.path),/* await */ req.session.user.tastes, userData.get(req.session.user.id).songsChosen)		/* await colorUtil.getColorsFromUpload(photo) */
+					song = await spotifyUtils.getSongFromColors(extractColors(photo.path), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)	
 					userData.get(req.session.user.id).songsChosen.push(song)				
 				}
 				else{
-					song = await spotifyUtils.getSongFromColors(extractColors(photo),/*  await */ req.session.user.tastes, userData.get(req.session.user.id).songsChosen)		/* await colorUtil.getColorsFromUrl(photo) */
+					song = await spotifyUtils.getSongFromColors(extractColors(photo), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)		
 					userData.get(req.session.user.id).songsChosen.push(song)
 				}
 			
