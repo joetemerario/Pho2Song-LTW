@@ -9,7 +9,7 @@ function getSong(){
             
             $("#text"+id).text(response.name)
             
-            $("#"+id).html($("#"+id).html()+string);
+            $("#"+id).append(string);
             $("#check"+id).attr("value",response.uri)
             $("#"+id).show();
         }});
