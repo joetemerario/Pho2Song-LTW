@@ -477,19 +477,9 @@ app.get('/getSong',checkAuthenticated,async function (req, res) {
 			console.log(e)
 			data='error'
 		}
-		//console.log(data)
 		if (data=='error') res.redirect('/')
 		else if (data) res.send(data)
 		else res.send('end')
-
-
-		/* work(req.session.user.tastes,userData.get(req.session.user.id)).then(data => {
-			console.log(data)
-			if (data=='error') res.redirect('/')
-			else if (data) res.send(data)
-			else res.send('end')
-
-		}) */
 	} catch (error) {
 		res.send('end')
 	}
