@@ -137,8 +137,6 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
   alreadyChosen = false
 
-  console.log("finito")
-
   return ret
 }
 
