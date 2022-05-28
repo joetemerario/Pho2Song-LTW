@@ -59,16 +59,20 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="FormControlInput1" class="form-label">Nome</label>
-                                            <input name="name" type="text" class="form-control" id="FormControlInput1" placeholder="Il mio album musicato">
+                                        <div class="form-floating mb-3">
+                                            <input name="name" type="text" class="form-control" id="FormControlInput1" placeholder="Il mio album musicato" required>
+                                            <label for="FormControlInput1" >Nome*</label>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="FormControlInput2" class="form-label">Descrizione</label>
-                                            <textarea name="description" class="form-control" id="FormControlInput2" rows="3"></textarea>
+                                        
+                                        <div class="form-floating">
+                                            <textarea name="description" class="form-control" id="FormControlInput2" placeholder="Il mio album musicato" style="height: 100px"></textarea>
+                                            <label for="FormControlInput2">Descrizione</label>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer align-content-between">
+                                        <div id="passwordHelpBlock" class="form-text mb-3 ">
+                                            *Obbligatorio
+                                        </div>
                                         <button type="button" class="btn btn-dark btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-dark btn-primary">Save</button>
                                     </div>
