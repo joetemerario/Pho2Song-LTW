@@ -44,16 +44,16 @@ async function getUserTaste(spotifyApi) {
 
 
 async function getSongFromColors(colors, songs, songsChosen) {
-
+  var colors = await colors 
   var max = null
   var red = 0;
   var green = 0;
   var blue = 0;
 
   for (colorIndex = 0; colorIndex < colors.length; colorIndex++) {
-    red += colors[colorIndex].r
-    green += colors[colorIndex].g
-    blue += colors[colorIndex].b
+    red += colors[colorIndex].red
+    green += colors[colorIndex].green
+    blue += colors[colorIndex].blue
   }
   red = red / colors.length
   green = green / colors.length
