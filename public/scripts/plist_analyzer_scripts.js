@@ -1,23 +1,23 @@
 function showAnalysis(id, place, plist_name) {
-    console.log(id)
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let values = JSON.parse(this.responseText);
-
-            if (document.getElementById("sezione-risultato").style.display == "none") {
-                document.getElementById("sezione-risultato").style.display = "initial"
+    $.ajax({
+        type: "post",
+        url: "plist-analyzer",
+        data: "playlistID=" + id,
+        dataType: "json",
+        success: function (values) {
+            if ($("#sezione-risultato").css("display") == "none") {
+                $("#sezione-risultato").css("display", "initial");
             }
 
-            if (document.getElementById("stats" + place).style.display == "none") {
-                document.getElementById("stats" + place).style.display = "initial"
+            if ($("#stats" + place).css("display") == "none") {
+                $("#stats" + place).css("display", "initial");
             }
 
-            if ((document.getElementById("aggiungi-scelta").style.display == "none") && (document.getElementById("scelta2").style.display == "none")) {
-                document.getElementById("aggiungi-scelta").style.display = "initial"
+            if (($("#aggiungi-scelta").css("display") == "none") && ($("#scelta2").css("display") == "none")) {
+                $("#aggiungi-scelta").css("display", "initial");
             }
 
-            document.getElementById("plist" + place).innerHTML = plist_name
+            $("#plist" + place).html(plist_name);
             
             let string = ''
 
@@ -28,7 +28,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Acousticness + '%;" aria-valuenow=" ' + values.Acousticness + ' " aria-valuemin="0" aria-valuemax="100">' + values.Acousticness + '%</div>'
             }
             
-            document.getElementById("acousticness" + place).innerHTML = string
+            $("#acousticness" + place).html(string);
 
             if (place == 1) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Danceability + '%;"aria-valuenow=" ' + values.Danceability + ' " aria-valuemin="0"aria-valuemax="100">' + values.Danceability + '%</div>'
@@ -37,7 +37,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Danceability + '%;" aria-valuenow=" ' + values.Danceability + ' " aria-valuemin="0"aria-valuemax="100">' + values.Danceability + '%</div>'
             }
             
-            document.getElementById("danceability" + place).innerHTML = string
+            $("#danceability" + place).html(string);
 
             if (place == 1) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Energy + '%;" aria-valuenow=" ' + values.Energy + ' " aria-valuemin="0"aria-valuemax="100">' + values.Energy + '%</div>'
@@ -46,7 +46,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Energy + '%;" aria-valuenow=" ' + values.Energy + ' " aria-valuemin="0"aria-valuemax="100">' + values.Energy + '%</div>'
             }
             
-            document.getElementById("energy" + place).innerHTML = string
+            $("#energy" + place).html(string);
 
             if (place == 1) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Instrumentalness + '%;"aria-valuenow=" ' + values.Instrumentalness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Instrumentalness + '%</div>'
@@ -55,7 +55,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Instrumentalness + '%;" aria-valuenow=" ' + values.Instrumentalness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Instrumentalness + '%</div>'
             }
             
-            document.getElementById("instrumentalness" + place).innerHTML = string
+            $("#instrumentalness" + place).html(string);
 
             if (place == 1) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Liveness + '%;"aria-valuenow=" ' + values.Liveness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Liveness + '%</div>'
@@ -64,7 +64,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Liveness + '%;" aria-valuenow=" ' + values.Liveness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Liveness + '%</div>'
             }
             
-            document.getElementById("liveness" + place).innerHTML = string
+            $("#liveness" + place).html(string);
 
             if (place == 1) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Speechiness + '%;"aria-valuenow=" ' + values.Speechiness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Speechiness + '%</div>'
@@ -73,7 +73,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<div class="progress-bar" role="progressbar" style="width:' + values.Speechiness + '%;" aria-valuenow=" ' + values.Speechiness + ' " aria-valuemin="0"aria-valuemax="100">' + values.Speechiness + '%</div>'
             }
             
-            document.getElementById("speechiness" + place).innerHTML = string
+            $("#speechiness" + place).html(string);
 
             if (place == 1) {
                 string = '<h6>Volume medio in decibel: ' + values.Loudness + ' dB</h6>'
@@ -81,7 +81,7 @@ function showAnalysis(id, place, plist_name) {
                 string = '<h6>' + values.Loudness + ' dB: ' + 'Volume medio in decibel</h6>'
             }
             
-            document.getElementById("loudness" + place).innerHTML = string
+            $("#loudness" + place).html(string);
 
             if (place == 1) {
                 string = '<h6>Tempo medio: ' + values.Tempo + ' BPM</h6>'
@@ -90,12 +90,9 @@ function showAnalysis(id, place, plist_name) {
                 string = '<h6>' + values.Tempo + ' BPM: ' + 'Tempo medio</h6>'
             }
             
-            document.getElementById("tempo" + place).innerHTML = string
+            $("#tempo" + place).html(string);
         }
-    };
-    xhttp.open("POST", "plist-analyzer");
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("playlistID=" + id);
+    });
 }
 
 
