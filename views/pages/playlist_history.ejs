@@ -24,14 +24,16 @@
         <div class="container-fluid">
             <div class="row mx-auto mt-2 p-1 mb-1">
                 <div class="col-12 mx-auto">
-                    <h1 class="text-center">Hey <%= p2suser %>!</h1> 
+                    <h2 class="text-center pt-md-5">Hey <%= p2suser %>!</h1> 
                 </div>
             </div>
+            <% if(playlistDisplayIsNotEmpty !== false){ %> 
             <div class="row mx-auto mt-1 mb-3 p-2">
                 <div class="col-12 mx-auto">
                     <h2 class="text-center">Ecco com'è andata la tua esperienza su Pho2Song!</h2>
                 </div>
             </div>
+            <% } %>
 
             <div class="row mx-auto p-2">
                 <% for(i=0; i < p2splaylists.length; i++) { %>
