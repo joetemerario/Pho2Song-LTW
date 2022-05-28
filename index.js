@@ -17,7 +17,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const spotifyUtils = require("./utils/spotifyUtils.js");
 const googleUtils = require('./utils/googleUtils.js')
-const colorUtil = require("./utils/getColors.js");
 
 const bodyParser = require('body-parser');
 const multer = require('multer');			//Abilita il file upload verso il server
