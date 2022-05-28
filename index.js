@@ -278,7 +278,6 @@ app.get('/google-login/callback', checkAuthenticated, passport.authenticate('goo
 	failureRedirect: '/input'
 }));
 app.get('/google-login/callback/return',function(req,res){
-	console.log(req.session.user.id+':'+ req.user.id)
 	req.session.user.albums=req.user.albums
 	req.session.user.accessTokenGoogle=req.user.accessToken
 	res.redirect('/input')
@@ -538,9 +537,9 @@ app.get('/playlist_history', checkAuthenticated, (req, res) => {
 			res.render('./pages/playlist_history.ejs', {
 				p2sUser: {
 					username: req.session.user.name,
+					id: req.session.user.id,
 					user_image: req.session.user.prof_pic
 				},
-				p2suser: req.session.user.name,
 				p2splaylists: data.data.rows
 				})
 			},

@@ -1,3 +1,5 @@
+/*** stile body e main ***/
+
 body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -18,9 +20,13 @@ main {
     overflow-y: hidden;
 }
 
+/*** stili aggiuntivi nav ***/
+
 .nav-flush .nav-link {
     border-radius: 0;
 }
+
+/*** stile playlist viewer ***/
 
 .playlist-name{
     color:rgb(30, 215, 96);
@@ -37,6 +43,8 @@ main {
 .song-item{
     word-break: break-all;
 }
+
+/*** stile redirect ***/
 
 .anchor-url{
     text-decoration: none;
