@@ -11,6 +11,15 @@ body {
     padding-top: 65px;
 }
 
+.form-check-input:checked{
+    background-color: rgb(68, 209, 139);
+    border-color:  rgb(40, 128, 84);
+    
+}
+.form-check-input:focus{
+    border-color: rgb(40, 128, 84);
+    box-shadow: 0 0 0 0.20rem rgb(68, 209, 139);
+}
 /*** stile bottoni ***/
 
 .btn-primary{

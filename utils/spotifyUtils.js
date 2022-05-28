@@ -209,17 +209,6 @@ async function analyzePlaylist(spotifyApi, playlistId) {
     Tempo: (averageTempo / (countTempo)).toFixed(2)
   }
 
-  console.log(countAcousticness)
-  console.log(countDanceability)
-  console.log(countEnergy)
-  console.log(countInstrumentalness)
-  console.log(countLiveness)
-  console.log(countLoudness)
-  console.log(countSpeechiness)
-  console.log(countTempo)
-
-  console.log(ret)
-
   return ret
 }
 
