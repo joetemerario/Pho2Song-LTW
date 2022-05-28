@@ -1,0 +1,17 @@
+body { 
+    padding-top: 65px; 
+}
+
+
+/* Stile radio list */
+
+.form-check-input:checked {
+    background-color: rgb(68, 209, 139);
+    border-color: rgb(40, 128, 84);
+}
+
+/* Stile analysis section */
+
+.progress-bar{
+    background-color: rgb(40, 128, 84);
+}

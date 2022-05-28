@@ -1,0 +1,78 @@
+.login-row{
+    padding: 3%;
+    margin: 4%;
+    margin-top: 3em;
+    border-radius: 30px;
+}
+
+.btn-spotify{
+    text-align: center;
+    width: 60%;
+}
+
+.btn1:hover{
+    background-color: rgb(23, 23, 23);
+    border: 1rem solid;
+}
+
+.bi{
+    margin-right: 0.5em;
+    display: inline-block;
+    vertical-align: -0.120em;
+    color: rgb(68, 209, 139);
+}
+
+.text-login-row{
+    margin-top: 1rem;
+}
+
+hr {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 35%;
+    margin-right: 35%;
+    color: grey;
+    background-color: currentColor;
+    border: 3;
+    opacity: 0.25;
+    size: 1em;
+}
+
+.redirect-spotify-row{
+    padding: 3%;
+    margin: 4%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+footer {
+    margin-top: 1em;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+}
+
+.anchor-register{
+    color: rgb(68, 209, 139);
+    text-decoration: none;
+}
+
+.anchor-footer {
+    color: rgb(68, 209, 139);
+    text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+    .button-login-row{
+        margin-top: 1rem;
+    }
+
+    .btn-spotify{
+        width: 60%;
+    }
+    
+    footer {
+        margin-top: 1em;
+        padding-top: 1rem;
+        padding-bottom: 4rem;
+    }
+}

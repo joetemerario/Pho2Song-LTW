@@ -1,0 +1,125 @@
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding-top: 65px;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.nav-flush .nav-link {
+    border-radius: 0;
+}
+
+.playlist-name{
+    color:rgb(30, 215, 96);
+    max-width: 20ch;
+    text-overflow: ellipsis;
+}
+
+.playlist-description{
+    color: black;
+    max-width: 20ch;
+    text-overflow: ellipsis;
+} 
+
+.song-item{
+    word-break: break-all;
+}
+
+.anchor-url{
+    text-decoration: none;
+    color: rgb(30, 215, 96);
+}
+
+/* .song-text{
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 60%;
+} */
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.plist-analyzer-link{
+    text-decoration: none;
+    color: rgb(30, 215, 96);
+}
+
+@media screen and (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+
+} 
+
+/* @media screen and (max-width: 320px){
+    .playlist-name{
+        max-width: 13ch;
+        text-overflow: ellipsis;
+    }
+    .playlist-description{
+        max-width: 13ch;
+        text-overflow: ellipsis;
+    }
+    .song-text{
+        display: inline-block;
+        max-width: 13ch;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    } 
+}
+
+@media screen and (max-width: 768px){
+    .playlist-name{
+       max-width: 25ch;
+        text-overflow: ellipsis;
+    }
+    .playlist-description{
+        max-width: 25ch;
+        text-overflow: ellipsis;
+    }
+    .song-text{
+        display: inline-block;
+        max-width: 25ch; 
+        
+        text-overflow: ellipsis;
+        overflow: hidden;
+    } 
+} */
+
+/* @media screen and (min-width: 1440px){
+    .playlist-name{
+       max-width: 25ch;
+        text-overflow: ellipsis;
+    }
+    .playlist-description{
+        max-width: 25ch;
+        text-overflow: ellipsis;
+    }
+    .song-text{
+        display: inline-block;
+        max-width: 50%; 
+        
+        text-overflow: ellipsis;
+        overflow: hidden;
+    } 
+}
+ */
