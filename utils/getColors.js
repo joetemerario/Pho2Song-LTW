@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const got = require('got')
 
 const FormData=require('form-data');
