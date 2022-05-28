@@ -17,7 +17,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const spotifyUtils = require("./utils/spotifyUtils.js");
 const googleUtils = require('./utils/googleUtils.js')
-const colorUtil = require("./utils/getColors.js");
 
 const bodyParser = require('body-parser');
 const multer = require('multer');			//Abilita il file upload verso il server
@@ -278,7 +277,6 @@ app.get('/google-login/callback', checkAuthenticated, passport.authenticate('goo
 	failureRedirect: '/input'
 }));
 app.get('/google-login/callback/return',function(req,res){
-	console.log(req.session.user.id+':'+ req.user.id)
 	req.session.user.albums=req.user.albums
 	req.session.user.accessTokenGoogle=req.user.accessToken
 	res.redirect('/input')
@@ -478,19 +476,9 @@ app.get('/getSong',checkAuthenticated,async function (req, res) {
 			console.log(e)
 			data='error'
 		}
-		//console.log(data)
 		if (data=='error') res.redirect('/')
 		else if (data) res.send(data)
 		else res.send('end')
-
-
-		/* work(req.session.user.tastes,userData.get(req.session.user.id)).then(data => {
-			console.log(data)
-			if (data=='error') res.redirect('/')
-			else if (data) res.send(data)
-			else res.send('end')
-
-		}) */
 	} catch (error) {
 		res.send('end')
 	}
@@ -538,9 +526,9 @@ app.get('/playlist_history', checkAuthenticated, (req, res) => {
 			res.render('./pages/playlist_history.ejs', {
 				p2sUser: {
 					username: req.session.user.name,
+					id: req.session.user.id,
 					user_image: req.session.user.prof_pic
 				},
-				p2suser: req.session.user.name,
 				p2splaylists: data.data.rows
 				})
 			},

@@ -121,8 +121,6 @@ function prepareSubmit() { //cancello l'ultimo campo text che sarà vuoto al mom
 }
 
 function addImage() {
-    console.log(arrayUrl)
-
     let urlInput = document.getElementById("urlSent"  + urlListItemId)
     if(!isValidHttpUrl(urlInput.value)){
         toast.show()

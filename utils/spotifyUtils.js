@@ -137,8 +137,6 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
   alreadyChosen = false
 
-  console.log("finito")
-
   return ret
 }
 
@@ -210,17 +208,6 @@ async function analyzePlaylist(spotifyApi, playlistId) {
     Speechiness: (averageSpeechiness / (countSpeechiness)).toFixed(2),
     Tempo: (averageTempo / (countTempo)).toFixed(2)
   }
-
-  console.log(countAcousticness)
-  console.log(countDanceability)
-  console.log(countEnergy)
-  console.log(countInstrumentalness)
-  console.log(countLiveness)
-  console.log(countLoudness)
-  console.log(countSpeechiness)
-  console.log(countTempo)
-
-  console.log(ret)
 
   return ret
 }

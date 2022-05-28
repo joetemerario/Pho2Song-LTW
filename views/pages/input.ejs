@@ -12,11 +12,11 @@
         
     <link href="/css/input_style.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/back_to_top_of_page_button_style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=wap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/footer_style.css">
 
     <script src="https://kit.fontawesome.com/a8ff1b6d16.js" crossorigin="anonymous"></script>
 
-    <title>Pho2Song - Input Feature</title>
+    <title>Pho2Song - Main Feature Input</title>
 </head>
 
 <body onload="highlightLink('main-feature'), setUp()">
@@ -60,7 +60,7 @@
                                         <div id="files-input-area"
                                             class="col-lg-10 col-xl-10 col-xxl-10 mx-auto my-2 justify-content-center my-auto">
                                             <input id="upload-files" class="form-control" type="file" name="images"
-                                                accept="image/*" multiple onclick="annihilateWholeLineage()"
+                                                accept="image/jpeg, image/png, image/svg" multiple onclick="annihilateWholeLineage()"
                                                 onchange="showFilesPreview(this.files)">
                                         </div>
 
