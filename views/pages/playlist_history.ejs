@@ -27,10 +27,10 @@
                     <h2 class="text-center pt-md-5">Hey <%= p2sUser.username %>!</h1> 
                 </div>
             </div>
-            <% if(playlistDisplayIsNotEmpty !== false){ %> 
+            <% if(p2splaylists.length != 0){ %> 
             <div class="row mx-auto mt-1 mb-3 p-2">
                 <div class="col-12 mx-auto">
-                    <h2 class="text-center">Ecco com'è andata la tua esperienza su Pho2Song!</h2>
+                    <h4 class="text-center">Ecco com'è andata la tua esperienza su Pho2Song!</h4>
                 </div>
             </div>
             <% } %>
@@ -90,12 +90,12 @@
             <% if(playlistDisplayIsNotEmpty === false){ %> 
                 <div class="row mx-auto p-2 text-center align-items-center">
                     <div class="col-lg-6 col-xl-6 col-xxl-6 mx-auto">
-                        <h3>Sembra che tu non abbia ancora utilizzato Pho2Song :(</h3>
+                        <h4>Sembra che tu non abbia ancora utilizzato Pho2Song :(</h4>
                     </div>
                 </div>
                 <div class="row mx-auto p-2 text-center align-items-center my-2">
                     <div class="col-lg-6 col-xl-6 col-xxl-6 mx-auto">
-                        <h3>Perché non provi a rimediare <a class="plist-analyzer-link" href="/input">cliccando qui! </a></h3>
+                        <h4>Perché non provi a rimediare <a class="plist-analyzer-link" href="/input">cliccando qui! </a></h4>
                     </div>
                 </div>
             <% } else {%> 
