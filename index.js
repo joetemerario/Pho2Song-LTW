@@ -260,8 +260,10 @@ app.get('/spotify-login/callback', checkNotAuthenticated,passport.authenticate('
 	successRedirect: '/spotify-login/callback/return',
 	failureRedirect: '/'
 }))
-app.get('/spotify-login/callback/return',function(req,res){
-	req.session.user=req.user
+app.get('/spotify-login/callback/return',checkAuthenticated,function(req,res){
+	if(req.session.user===undefined){
+		req.session.user=req.user
+	}
 	res.redirect('/')
 })
 
@@ -276,7 +278,7 @@ app.get('/google-login/callback', checkAuthenticated, passport.authenticate('goo
 	successRedirect: '/google-login/callback/return',
 	failureRedirect: '/input'
 }));
-app.get('/google-login/callback/return',function(req,res){
+app.get('/google-login/callback/return',checkAuthenticated ,function(req,res){
 	req.session.user.albums=req.user.albums
 	req.session.user.accessTokenGoogle=req.user.accessToken
 	res.redirect('/input')
@@ -300,30 +302,6 @@ app.get('/input', checkAuthenticated, function (req, res) { // input prima del l
 /************** Gestione del risultato **************/
 
 const userData = new Map();
-
-async function work(userTasteInfo,userData) {
-	try{
-		var photo = userData.photos.pop();
-	}catch(e){
-		return 'error'
-	}
-	var imgName = userData.names.pop();
-	if (photo == null) return;
-	var song
-	try{
-		url = new URL(photo)
-		song = await spotifyUtils.getSongFromColors(await colorUtil.getColorsFromUrl(photo),userTasteInfo)
-		
-	}catch(e){
-		song = await spotifyUtils.getSongFromColors(await colorUtil.getColorsFromUpload(photo),userTasteInfo)
-	}
-
-	userData.songsDB.push({
-		song: song,
-		photo: imgName
-	})
-	return song
-}
 
 app.post('/result',upload.array("images", 50), checkAuthenticated, function (req, res) {
 	userData.set(req.session.user.id,{
