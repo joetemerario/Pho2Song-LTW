@@ -399,7 +399,7 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 		spotifyApi.createPlaylist(req.body.name || 'Il mio album in musica', {// creo una nuova playlist
 			'description': req.body.description
 		}).then(data => {//aggiungo le tracce selezionate nella nuova playlist (se presenti)
-			consolr.log(data.body.id)
+			console.log(data.body.id)
 			if (selectedSongs) {
 				spotifyApi.addTracksToPlaylist(data.body.id, selectedSongs)
 			}
@@ -419,7 +419,7 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 			name: req.body.name,
 			user: req.session.user.id,
 			description: req.body.description,			
-			song_number: req.body.songs.length,
+			song_number: selectedSongs.length,
 			songs: songsDB 
 		})
 	})
