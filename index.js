@@ -395,13 +395,17 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 	} catch (e) {
 		selectedSongs.push(req.body.songs)
 	}
-	spotifyApi.createPlaylist(req.body.name || 'Il mio album in musica', {// creo una nuova playlist
-		'description': req.body.description
-	}).then(data => {//aggiungo le tracce selezionate nella nuova playlist (se presenti)
-		if (selectedSongs) {
-			spotifyApi.addTracksToPlaylist(data.body.id, selectedSongs)
-		}
-	})
+	try {
+		spotifyApi.createPlaylist(req.body.name || 'Il mio album in musica', {// creo una nuova playlist
+			'description': req.body.description
+		}).then(data => {//aggiungo le tracce selezionate nella nuova playlist (se presenti)
+			if (selectedSongs) {
+				spotifyApi.addTracksToPlaylist(data.body.id, selectedSongs)
+			}
+		})
+	} catch (e) {
+		console.log(e)
+	}
 	
 	songsDB=songsDB.filter(songImg => selectedSongs.includes(songImg.song.uri)) // filtro le canzoni in base alle canzoni che l'utente ha selezionato
 
