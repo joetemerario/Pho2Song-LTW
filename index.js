@@ -297,6 +297,17 @@ app.get('/input', checkAuthenticated, function (req, res) { // input prima del l
 		} 
 	})
 });
+app.post('/checkUrl', async function (req, res) { // input prima del login con google 
+	try {
+		let colors = await extractColors(req.body.url)
+	} catch (e) {
+		console.log(req.body.url)
+		res.send(false);
+		return
+	}
+	res.send(true)
+	
+});
 
 
 /************** Gestione del risultato **************/

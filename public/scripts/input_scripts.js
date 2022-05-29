@@ -73,17 +73,16 @@ function setUp(){
     urlInputArea.innerHTML+= "<input type='text'  class='form-control' name='urls' id='urlSent" + urlListItemId+ "'placeholder='https://...' >"
 }
 
+
 //URL validation
-function isValidHttpUrl(string) {
+async function isValidHttpUrl(string) {
     let url;
-    
     try {
       url = new URL(string);
     } catch (_) {
       return false;  
     }
-  
-    return url.protocol === "http:" || url.protocol === "https:";
+    return url.protocol === "http:" || url.protocol === "https:"
 }
 
 //URL checking if it is already in arrayUrl
@@ -92,6 +91,9 @@ function isNew(url){
         if (url == arrayUrl[index])return false
     }
     return true
+}
+function isImage(url) {
+    return  !(/\.(webp)$/.test(url));
 }
 
 //URL manipulating input texts
@@ -122,19 +124,30 @@ function prepareSubmit() { //cancello l'ultimo campo text che sarà vuoto al mom
 
 function addImage() {
     let urlInput = document.getElementById("urlSent"  + urlListItemId)
-    if(!isValidHttpUrl(urlInput.value)){
-        toast.show()
-        invalidateInputText(urlInput)
-    }
-    else if(!isNew(urlInput.value)){ 
-        toast.show()
-        invalidateInputText(urlInput)
-    }
-    else{
-        reloadInputText(urlInput)
-        display(urlInput)
-    }
-    urlListItemId++
+    $.post('checkUrl',{url: urlInput.value},function(response){
+        if(response=='false'|| response===false){
+            toast.show()
+            invalidateInputText(urlInput) 
+        }
+        else if(!isValidHttpUrl(urlInput.value)){
+            toast.show()
+            invalidateInputText(urlInput)
+        }
+        else if(!isImage(urlInput.value)){ 
+            toast.show()
+            invalidateInputText(urlInput)
+        }
+        else if(!isNew(urlInput.value)){ 
+            toast.show()
+            invalidateInputText(urlInput)
+        }
+        else{
+            reloadInputText(urlInput)
+            display(urlInput)
+        }
+        urlListItemId++
+    })
+
 };
 
 
