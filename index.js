@@ -399,6 +399,7 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 		spotifyApi.createPlaylist(req.body.name || 'Il mio album in musica', {// creo una nuova playlist
 			'description': req.body.description
 		}).then(data => {//aggiungo le tracce selezionate nella nuova playlist (se presenti)
+			consolr.log(data.bofy)
 			if (selectedSongs) {
 				spotifyApi.addTracksToPlaylist(data.body.id, selectedSongs)
 			}
