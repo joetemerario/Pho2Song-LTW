@@ -58,6 +58,7 @@ function view(doc) {
 
 //STRATEGIA PASSPORT SPOTIFY
 const spotify_users = new Map();
+const spotify_timers = new Map();
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const spotify_scopes = [
@@ -109,7 +110,9 @@ passport.use('spotify',
 				let data = await spotifyApi.refreshAccessToken();
 				let access_token = data.body['access_token'];
 				spotifyApi.setAccessToken(access_token);
+				console.log('accesstoken refreshed')
 			  }, expiresIn / 2 * 1000);
+			spotify_timers.set(profile.id,intervalID)
 
 			let prof_pic
 			if(profile.photos.length==0)prof_pic = './images/skuffed_def_prof_pic_spotify.jpg'
@@ -185,7 +188,7 @@ app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-	secret: 'secret',
+	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: false
 }))
@@ -242,7 +245,8 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 
 app.post('/logout', checkAuthenticated, (req, res) => {
 	spotify_users.delete(req.session.user.id);
-	
+	clearInterval(spotify_timers.get(req.session.user.id));
+	spotify_timers.delete(req.session.user.id)
 	req.logout()
 	userData.delete(req.session.user.id)
 	req.session.user=undefined;
@@ -427,39 +431,35 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 })
 
 app.get('/getSong',checkAuthenticated,async function (req, res) {
-	try {
-		let data	
-		try{
-			let photo = userData.get(req.session.user.id).photos.pop();
-			let imgName = userData.get(req.session.user.id).names.pop();
-			if (photo == null) data=null
-			else{
-				let song
-				if(photo.path !== undefined){
-					song = await spotifyUtils.getSongFromColors(extractColors(photo.path), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)	
-					userData.get(req.session.user.id).songsChosen.push(song)				
-				}
-				else{
-					song = await spotifyUtils.getSongFromColors(extractColors(photo), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)		
-					userData.get(req.session.user.id).songsChosen.push(song)
-				}
-			
-				userData.get(req.session.user.id).songsDB.push({
-					song: song,
-					photo: imgName
-				})
-				data=song
+	let data	
+	try{
+		let photo = userData.get(req.session.user.id).photos.pop();
+		let imgName = userData.get(req.session.user.id).names.pop();
+		if (photo == null) data=null
+		else{
+			let song
+			if(photo.path !== undefined){
+				song = await spotifyUtils.getSongFromColors(extractColors(photo.path), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)	
+				userData.get(req.session.user.id).songsChosen.push(song)				
 			}
-		}catch(e){
-			console.log(e)
-			data='error'
+			else{
+				song = await spotifyUtils.getSongFromColors(extractColors(photo), req.session.user.tastes, userData.get(req.session.user.id).songsChosen)		
+				userData.get(req.session.user.id).songsChosen.push(song)
+			}
+		
+			userData.get(req.session.user.id).songsDB.push({
+				song: song,
+				photo: imgName
+			})
+			data=song
 		}
-		if (data=='error') res.redirect('/')
-		else if (data) res.send(data)
-		else res.send('end')
-	} catch (error) {
-		res.send('end')
+	}catch(e){
+		console.log(e)
+		data='error'
 	}
+	if (data=='error') res.redirect('/')
+	else if (data) res.send(data)
+	else res.send('end')
 })
 
 /************** Funzionalità: Playlist analyzer **************/
