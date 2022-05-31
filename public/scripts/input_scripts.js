@@ -75,7 +75,7 @@ function setUp(){
 
 
 //URL validation
-async function isValidHttpUrl(string) {
+function isValidHttpUrl(string) {
     let url;
     try {
       url = new URL(string);
