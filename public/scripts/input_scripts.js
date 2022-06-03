@@ -92,38 +92,41 @@ function isNew(url){
     }
     return true
 }
+//URL controllo se l'immagine è in un formato digeribile dal server
 function isImage(url) {
     return  !(/\.(webp)$/.test(url));
 }
 
 //URL manipulating input texts
 function reloadInputText(target){
-    target.style.display='none'//disabilito l'input relativo al i-esimo click su 'Agggiungi'
+    target.style.display='none'//nascondol'input relativo al i-esimo click su 'Aggiungi'
     //creo l'input relativo al i+1-esimo click su 'Agggiungi'
     urlInputArea.innerHTML += "<input type='text'  class='form-control' name='urls' id='urlSent" + (urlListItemId+1) + "' 'placeholder='https://...''>" 
 }
 
 function invalidateInputText(target){
-    target.parentElement.removeChild(target);
+    target.parentElement.removeChild(target);//cancello l'input relativo al i-esimo click su 'Aggiungi'
+    //creo l'input relativo al i+1-esimo click su 'Aggiungi'
     urlInputArea.innerHTML += "<input type='text'  class='form-control' name='urls' id='urlSent" + (urlListItemId+1) + "' 'placeholder='https://...''>" 
 }
 
-//chiamata onclick del tasto 'Submit'
+//chiamata onclick del tasto 'Invia'
 function prepareSubmit() { //cancello l'ultimo campo text che sarà vuoto al momento del submit
     let urlInput = document.getElementById("urlSent"  + urlListItemId)
     urlInputArea.removeChild(urlInput);
 
     let i=0;
-    urlInputArea.childNodes.forEach(urlInput=>{
+    urlInputArea.childNodes.forEach(urlInput=>{/* popolo gli input text con gli url validi prima del submit */
         if(urlInput.id !== undefined){
             urlInput.value=arrayUrl[i]
             i++
         }
     })
 }
-
+//chiamata onclick del tasto 'Aggiungi'
 function addImage() {
     let urlInput = document.getElementById("urlSent"  + urlListItemId)
+    /* questa post manda l'url preventivamente al server per verificare che il nostro server possa accedere all'url */
     $.post('checkUrl',{url: urlInput.value},function(response){
         if(response=='false'|| response===false){
             toast.show()
@@ -141,7 +144,7 @@ function addImage() {
             toast.show()
             invalidateInputText(urlInput)
         }
-        else{
+        else{//se supera tutti i controlli chiamo display
             reloadInputText(urlInput)
             display(urlInput)
         }
@@ -169,10 +172,10 @@ function display(urlInput) {
     urlPreview.innerHTML += urlListItemHTML
     urlInput.value=url;
 }
-
+//chiamata onclick del tasto 'Elimina' nel list item che mostra il nome della foto (creato precedentemente dalla funzione display)
 function UrlDelete(url,id){
     let urlInput=document.getElementById("urlSent" + id)
-    urlInput.parentElement.removeChild(urlInput);//disabilito il relativo campo input
+    urlInput.parentElement.removeChild(urlInput);//cancello il relativo campo input
     document.getElementById("urlItem" + id).style.display = "none";//nascondo il list item che visualizzava il nome
 
     arrayUrl=arrayUrl.filter(arrayUrlElem => arrayUrlElem!=url )//rimuovo dalla lista dei link attivi

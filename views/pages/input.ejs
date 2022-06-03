@@ -94,7 +94,7 @@
 
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
-
+                            <!-- form relativa agli url -->
                             <form id="urlForm" action="/result" method="post"
                                 enctype="application/x-www-form-urlencoded">
 
@@ -105,8 +105,8 @@
                                 </div>
 
                                 <div class="row mx-auto my-4">
-                                    <div id="urlInputArea" class="col-lg-8 col-xl-8 col-xxl-8 mx-auto my-2">
-
+                                    <div id="urlInputArea" class="col-lg-8 col-xl-8 col-xxl-8 mx-auto my-2"><!-- zona dove vengono inseriti gli input di testo -->
+                                        <!-- il primo verrà creato on load dalla funzione setUp -->
                                     </div>
                                     <div class="col-lg-2 col-xl-2 col-xxl-2 mx-auto my-2">
                                         <input id="aggiungi-url" type="button" class="btn btn-primary" value="Aggiungi"
@@ -121,6 +121,7 @@
 
                                 <div class="row mx-auto">
                                     <div class="col-12 my-auto">
+                                        <!-- zona di preview dei file -->
                                         <ul id="urlPreview" class="list-group list-group-flush">
 
                                         </ul>
@@ -164,7 +165,7 @@
                                         <div class="col-lg-8">
                                             <form action="/result" method="post">
                                                 <%var i=0 %>
-                                                    <% albums.forEach(function(album){ %>
+                                                    <% albums.forEach(function(album){ %><!-- inserisco se esistono gli album di google dell'utente -->
                                                         <div class="form-check" name="albums">
                                                             <input class="form-check-input" type="radio" name="album"
                                                                 id="flexRadioDefault2" value="<%=i++%>" checked>
