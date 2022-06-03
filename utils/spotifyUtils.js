@@ -42,14 +42,15 @@ async function getUserTaste(spotifyApi) {
   return ret
 }
 
-
+//funzione algoritmo per matchare ad ogni foto una canzone dagli userTaste dell'utente. Viene chiamata una volta per ogni foto.
 async function getSongFromColors(colors, songs, songsChosen) {
-  var colors = await colors 
-  var max = null
+  var colors = await colors //palette di colori della corrispettiva foto (ogni colore è in scala RGB)
+  var max = null 
   var red = 0;
   var green = 0;
   var blue = 0;
 
+  //calcolo la media tra i colori della palette
   for (colorIndex = 0; colorIndex < colors.length; colorIndex++) {
     red += colors[colorIndex].red
     green += colors[colorIndex].green
@@ -59,16 +60,18 @@ async function getSongFromColors(colors, songs, songsChosen) {
   green = green / colors.length
   blue = blue / colors.length
 
+  //colore medio in scala RGB
   var averageColor = {
     r: red,
     g: green,
     b: blue,
   }
 
+  //controllo tutte le canzoni all'interno degli userTaste (songs) dell'utente
   for (songIndex = 0; songIndex < songs.length; songIndex++) {
     //controllo se è stata già scelta la stessa canzone
     for(chosenIndex = 0; chosenIndex < songsChosen.length; chosenIndex++){
-      if (songs[songIndex].uri == songsChosen[chosenIndex].uri) {
+      if (songs[songIndex].uri == songsChosen[chosenIndex].uri) { 
         alreadyChosen = true;
         break;
       }
@@ -80,14 +83,26 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     if(max == null) max = songs[songIndex]
 
-    //rosso
+    //Il colore medio può essere blu, verde, giallo, arancione, rosso, viola, bianco, nero o grigio rispetto a delle condizioni.
+    //Es: per il rosso il valore r(red) della scala RGB deve essere maggiore di g(green) e b(blue).
+
+    //una volta scelto a quale colore corrisponde il colore medio, la canzone deve avere caratteristiche maggiori rispetto all'ultima canzone selezionata (max).
+    //Ogni valore nella scala RGB è associato ad una caratteristica di una canzone. Lo schema è il seguente:
+    //energy: valore R
+    //acousticness: valore G
+    //danceability: valore B
+    //Es: il colore medio è rosso, quindi la canzone corrente deve avere una energy maggiore rispetto all'ultima canzone selezionata (max)
+
+    //rosso 
     if (averageColor.r > averageColor.b && averageColor.r > averageColor.g) {
+      //energy 
       if (songs[songIndex].energy > max.energy) {
         max = songs[songIndex]
       }
     }
-    //arancione
+    //arancione 
     else if (averageColor.r > averageColor.g && averageColor.r > averageColor.b && averageColor.r / averageColor.g < averageColor.r / averageColor.b && averageColor.r / averageColor.g > 1.25) {
+      //energy + acousticness
       if (songs[songIndex].energy > max.energy && songs[songIndex].acousticness > max.acousticness) {
         max = songs[songIndex]
       }
@@ -95,6 +110,7 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     //giallo
     else if (averageColor.r > averageColor.g && averageColor.g > averageColor.b && averageColor.r / averageColor.g <= 1.25 && averageColor.r / averageColor.g >= 0.75 && averageColor.r / averageColor.g < averageColor.r / averageColor.b) {
+      //energy + acousticness 
       if (songs[songIndex].energy > max.energy && songs[songIndex].acousticness > max.acousticness) {
         max = songs[songIndex]
       }
@@ -102,6 +118,7 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     //verde
     else if (averageColor.g > averageColor.r && averageColor.g > averageColor.b) {
+      //acousticness
       if (songs[songIndex].acousticness > max.acousticness) {
         max = songs[songIndex]
       }
@@ -109,6 +126,7 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     //blu
     else if (averageColor.b > averageColor.r && averageColor.b > averageColor.g) {
+      //danceability
       if (songs[songIndex].danceability > max.danceability) {
         max = songs[songIndex]
       }
@@ -116,6 +134,7 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     //viola
     else if (averageColor.b > averageColor.r && averageColor.b > averageColor.g && averageColor.b / averageColor.r > averageColor.b / averageColor.g) {
+      //danceability + energy
       if (songs[songIndex].danceability > max.danceability && songs[songIndex].energy > max.energy) {
         max = songs[songIndex]
       }
@@ -123,6 +142,7 @@ async function getSongFromColors(colors, songs, songsChosen) {
 
     //bianco,grigio,nero
     else if (averageColor.r == averageColor.g && averageColor.r == averageColor.b) {
+      // danceability, energy e acousticness i più bassi possibile
       if (songs[songIndex].acousticness <= max.acoustiness && songs[songIndex].energy <= max.energy && songs[songIndex.danceability] <= max.danceability) {
         max = songs[songIndex]
       }

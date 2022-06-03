@@ -7,11 +7,3 @@ function displaySongs(playlist){
         playlistContainer.style = "display: none;"
     } 
 }
-
-function displayIsEmpty(){
-    if(document.getElementById("playlistItem1") == null){      
-        return true;
-    } 
-    return false;
-}
-

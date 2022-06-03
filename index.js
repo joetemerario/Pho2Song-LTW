@@ -222,7 +222,7 @@ gestire le richieste per verificare che l'utente sia loggato e che quindi abbia 
 
 /**************************  Gestione della home ****************************/
 
-app.get('/', /* checkNotAuthenticated, */(req, res) => {
+app.get('/',(req, res) => {
 	let p2sUser = null
 	if(req.session.user !==undefined &&  req.session.user != null){
 		p2sUser = {
@@ -421,7 +421,26 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 	
 	songsDB=songsDB.filter(songImg => selectedSongs.includes(songImg.song.uri)) // filtro le canzoni in base alle canzoni che l'utente ha selezionato
 
+	/* Struttura di un documento (playlist) nel database:
 
+	{
+		_id: id del documento 
+		name: nome della playlist
+		user: id dell'utente che possiede questa playlist
+		description: descrizione della playlist
+		song_number: numero di canzoni nella playlist
+		songs: [
+			{
+				song: {
+					uri: uri della canzone
+					name: nome della canzone
+				}
+				photo: foto correlata alla canzone 
+			}
+		]
+	}
+
+	*/
 
 	couch.uniqid().then((ids) => {// aggiungo la playlist al DB
         const id = ids[0]
