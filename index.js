@@ -518,7 +518,10 @@ app.listen(8888, () => {
 /************** Funzionalità: Playlist History ******************* */
 
 app.get('/plist-history', checkAuthenticated, (req, res) => {
-	couch.get(dbName, viewUrl ).then(
+	// Viene eseguita una get sul database tramite la view (ottiene tutti i documenti con tutti i parametri). 
+	// Poi viene dato in input per il render a plist-history.ejs p2sUser, contenente username, user id e immagine del profilo dell'utente in sessione, 
+	// e tutte le playlist ottenute dal get al database
+	couch.get(dbName, viewUrl ).then( 
         (data, headers, status) => {
 			res.render('./pages/plist-history.ejs', {
 				p2sUser: {
