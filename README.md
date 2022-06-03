@@ -15,28 +15,28 @@ escludendo i dettagli
 * public
     * css
         1. __back_to_top_of_page_button_style.css__ : foglio di stile per il componente multipagina che permette di tornare in cima alla scheda.
-        2. __footer_style.css__ : foglio di stile per il componente parziale footer.ejs.
+        2. __footer_style.css__ : foglio di stile per il componente parziale __footer.ejs__.
         3. __input_style.css__
-        4. __landing_page_style.css__ : foglio di stile per la pagina landing_page.ejs.
-        5. __login_style.css__ : foglio di stile per la pagina login.ejs.
-        6. __plist_analyzer_style.css__ : foglio di stile per la pagina plist-analyzer.ejs.
-        7. __plist_history_style.css__ : foglio di stile per la pagina plist-history.ejs.
+        4. __landing_page_style.css__ : foglio di stile per la pagina __landing_page.ejs__.
+        5. __login_style.css__ : foglio di stile per la pagina __login.ejs__.
+        6. __plist_analyzer_style.css__ : foglio di stile per la pagina __plist-analyzer.ejs__.
+        7. __plist_history_style.css__ : foglio di stile per la pagina __plist-history.ejs__.
         8. __result_style.css__
     * images
     * scripts
         1. __back_to_top_of_page_script.js__ : file JavaScript contenente gli script per far funzionare il bottone per tornare in cima alla pagina.
-            1. _scrollFunction()_ : funzione che in base al valore di window.scrollY mostra o nasconde il bottone per tornare in cima alla pagina.
-            2. _backToTop()_ : funzione che chiama il metodo scrollTo(0, 0) di window, per tornare in cima alla pagina.
+            1. _scrollFunction()_ : funzione che in base al valore di __window.scrollY__ mostra o nasconde il bottone per tornare in cima alla pagina.
+            2. _backToTop()_ : funzione che chiama il metodo _scrollTo(0, 0)_ di __window__, per tornare in cima alla pagina.
         2. __input_scripts.js__
-            1. _annihilateWholeLineage()_ : funzione che elimina tutti i componenti list item da una unordered list con id = files-list.
+            1. _annihilateWholeLineage()_ : funzione che elimina tutti i componenti list item da una unordered list con id = "#files-list".
             2. _manageSubmitButton(dim)_ : funzione che attiva o disattiva il bottone di submit a seconda del numero di file pronti per l'invio al server.
             3. _showFilesPreview(inputFiles)_ : funzione che mostra a schermo la lista dei file attualmente in input nella form di invio.
         3. __main_results_scripts.js__
         4. __navbar_scripts.js__
-        5. __plist_analyzer_scripts.js__ : file JavaScript contenente gli script per la pagina plist-analyzer.ejs.
+        5. __plist_analyzer_scripts.js__ : file JavaScript contenente gli script per la pagina __plist-analyzer.ejs__.
             1. _showAnalysis(id, place, plist_name)_ : funzione che tramite chiamata Ajax, richiede al server i risultati dell'analisi della playlist individuata da __id__ e li mostra a schermo.
             2. _choosePlaylistToCompare()_ : funzione che nasconde il tasto per far apparire la seconda lista di playlist e mostra quest'ultima a schermo.
-        6. __plist_history_scripts.js__ : file JavaScript contenente gli script per la pagina plist-history.ejs. 
+        6. __plist_history_scripts.js__ : file JavaScript contenente gli script per la pagina __plist-history.ejs__. 
             1. _displaySongs(playlist)_ : funzione chiamata premendo il pulsante riferito ad una playlist. La visualizza se nascosta o viceversa.
 * utils
     1. __googleUtils.js__ : file JavaScript contenente tutte le funzioni che richiedono l'utilizzo delle API di Google.
