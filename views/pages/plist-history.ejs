@@ -27,19 +27,21 @@
                     <h2 class="text-center pt-md-5">Hey <%= p2sUser.username %>!</h1> 
                 </div>
             </div>
-            <% if(p2splaylists.length != 0){ %> 
+            
             <div class="row mx-auto mt-1 mb-3 p-2">
                 <div class="col-12 mx-auto">
                     <h4 class="text-center">Ecco com'è andata la tua esperienza su Pho2Song!</h4>
                 </div>
             </div>
-            <% } %>
 
             <div class="row mx-auto p-2">
+                <!-- Controllo tutte le playlist nel database (per controllare la struttura del database, si veda index.js riga 417) -->
                 <% for(i=0; i < p2splaylists.length; i++) { %>
+                    <!-- Se la playlist ha come user l'id dell'utente corrente, allora visualizza la playlist sulla pagina -->
                     <% if(p2sUser.id==p2splaylists[i].value.user){ %>
                         <div class="col-lg-4 col-xl-4 col-xxl-4 my-2">
                             <ul class="list-group">
+                                <!-- Bottone per visualizzare o nascondere il contenuto della playlist -->
                                 <button type="button" class="list-group-item d-flex justify-content-between align-items-start"
                                     onclick="displaySongs('<%= p2splaylists[i].id%>')">
                                     <div class="ms-2 me-auto">
@@ -58,6 +60,7 @@
                         </div>
                         <div class="col-lg-8 col-xl-8 col-xxl-8 my-2">
                             <ul class="list-group mx-auto" id="<%=p2splaylists[i].id%>Songs" style="display: none;">
+                                <!-- Per ogni canzone nella playlist, viene visualizzato il nome e la foto a cui è riferita -->
                                 <% p2splaylists[i].value.songs.forEach((songData)=> { %>
                                     <li class="list-group-item song-item mx-auto d-flex align-content-center">
                                         <div class="row">
@@ -79,6 +82,7 @@
                                 <% }) %>
                             </ul>
                         </div>
+                        <!-- L'utente ha salvato almeno una playlist tramite Pho2Song -->
                         <% playlistDisplayIsNotEmpty = true %>
                     <% } %>
                 <% } %>
@@ -87,6 +91,8 @@
             <div onshow="displayNoSongs()" id="no-songs-displayed">
 
             </div>
+
+            <!-- Se l'utente non ha salvato nessuna playlist tramite Pho2Song viene visualizzato questo messaggio -->
             <% if(playlistDisplayIsNotEmpty === false){ %> 
                 <div class="row mx-auto p-2 text-center align-items-center">
                     <div class="col-lg-6 col-xl-6 col-xxl-6 mx-auto">
