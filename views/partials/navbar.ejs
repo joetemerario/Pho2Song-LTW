@@ -18,11 +18,12 @@
                     <a id="third-feature" class="nav-link" href="./plist-history">P.list History</a>
                 </li>
             </ul>
-            <% if (!p2sUser) { %>
+            <!-- Tramite EJS invio questa variabile al front end, utile a capire se una sessione è attiva, e quindi a capire se un utente è loggato -->
+            <% if (!p2sUser) { %>   <!-- Se l'utente non è loggato visualizzo il tasto di login -->
                 <div class="text-end">
                     <a href="./login" class="btn btn-outline-success me-2">Login</a>
                 </div>
-                <% } else { %>
+                <% } else { %>  <!-- Se invece è loggato, mostro la sua immagine del profilo di Spotify è un dropdow menu per permettergli di effettuare il log out -->
                     <div class="dropdown">
                         <a href="#" class="text-end d-block link-light text-decoration-none dropdown-toggle"
                             id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">

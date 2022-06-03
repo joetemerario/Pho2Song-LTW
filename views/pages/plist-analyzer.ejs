@@ -17,9 +17,9 @@
     <title>Pho2Song-P.list analyzer</title>
 </head>
 
-<body onload="highlightLink('second-feature')">
+<body onload="highlightLink('second-feature')"> <!-- Illuimino il bottone corrispondente alla risorsa Playlist Analyzer-->
 
-    <%- include("../partials/navbar.ejs"); %>
+    <%- include("../partials/navbar.ejs"); %>   <!-- Includo il parziale navbar.ejs-->
 
     <section id="sezione-scelta">
         <div class="container-fluid">
@@ -32,21 +32,21 @@
                 <div id="scelta1" class="col-lg-4 col-md-6 mx-auto">
                     <form>
                         <ul class="list-group list-group-flush">
-                            <% playlists.forEach(playlist=> { %>
+                            <% playlists.forEach(playlist=> { %>    <!-- Tramite codice EJS visualizzo a schermo una ul che contiene li con all'interno un check radio e un nome di playlist ognuno -->
                                 <li class="list-group-item">
-                                    <input class="form-check-input" type="radio" name="playlistID"
-                                        value="<%= playlist.id %>" id="<%= playlist.name%>"
-                                        onclick=" showAnalysis(this.value, 1, this.id)">
+                                    <input class="form-check-input" type="radio" name="playlistID"  
+                                        value="<%= playlist.id %>" id="<%= playlist.name%>" 
+                                        onclick=" showAnalysis(this.value, 1, this.id)">    <!-- Questo tag input contiene l'id della playlist Spotify, il nome della playlist e un listener che lancia la funzione showAnalysis al click del cekck radio -->
                                     <label class="form-check-label" for="<%= playlist.name%>">
                                         <%= playlist.name %>
-                                    </label>
+                                    </label>    <!-- Qui viene visualizzato il nome della playlist -->
                                 </li>
-                            <% }) %>
+                            <% }) %>    <!-- Tutte le variabili sono passate al client direttamente dal server grazie a EJS -->
                         </ul>
                     </form>
                 </div>
 
-                <div id="scelta2" class="col-lg-4 col-md-6 mx-auto" style="display: none;">
+                <div id="scelta2" class="col-lg-4 col-md-6 mx-auto" style="display: none;"> <!-- Questa sezione è quella che contiene le playlist per effettuare il compare, ma il funzionamento è identico a quello di cui sopra -->
                     <form>
                         <ul class="list-group list-group-flush">
                             <% playlists.forEach(playlist=> { %>
@@ -63,7 +63,7 @@
                     </form>
                 </div>
 
-                <div id="aggiungi-scelta" class="col-lg-2 col-md-3 mx-auto text-center" style="display: none;">
+                <div id="aggiungi-scelta" class="col-lg-2 col-md-3 mx-auto text-center" style="display: none;"> <!-- Tasto per mostrare a schermo la seconda lista di playlist -->
                     <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Scegli una playlist da comparare" onclick="choosePlaylistToCompare()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
@@ -75,7 +75,7 @@
     </section>
 
 
-    <section id="sezione-risultato" style="display:none;">
+    <section id="sezione-risultato" style="display:none;">  <!-- In questa sezione compaiono i risultati delle analisi -->
         <div class="container-fluid">
             <div class="row justify-content-center pt-4">
                 <div id="stats1" class="col-lg-6 text-start" style="display:none;">
@@ -199,9 +199,9 @@
         </div>
     </section>
 
-    <%- include("../partials/footer.ejs"); %> 
+    <%- include("../partials/footer.ejs"); %>   <!-- Includo il parziale footer.ejs-->
 
-    <button id="back-to-top" type="button" class="btn btn-success">
+    <button id="back-to-top" type="button" class="btn btn-success"> <!-- Icona Bootstrap facente parte del bottone per tornare in cima alla pagina -->
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"

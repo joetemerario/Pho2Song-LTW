@@ -32,7 +32,8 @@ escludendo i dettagli
             2. _manageSubmitButton(dim)_ : funzione che attiva o disattiva il bottone di submit a seconda del numero di file pronti per l'invio al server.
             3. _showFilesPreview(inputFiles)_ : funzione che mostra a schermo la lista dei file attualmente in input nella form di invio.
         3. __main_results_scripts.js__
-        4. __navbar_scripts.js__
+        4. __navbar_scripts.js__ : file JavaScript contenente gli script del parziale __navbar.ejs__
+            1. _highlightLink(id)_ : funzione che illumina il bottone della navbar con id = __id__
         5. __plist_analyzer_scripts.js__ : file JavaScript contenente gli script per la pagina __plist-analyzer.ejs__.
             1. _showAnalysis(id, place, plist_name)_ : funzione che tramite chiamata Ajax, richiede al server i risultati dell'analisi della playlist individuata da __id__ e li mostra a schermo.
             2. _choosePlaylistToCompare()_ : funzione che nasconde il tasto per far apparire la seconda lista di playlist e mostra quest'ultima a schermo.

@@ -489,16 +489,18 @@ app.get('/getSong',checkAuthenticated,async function (req, res) {
 })
 
 /************** Funzionalità: Playlist analyzer **************/
+
+//Richiesta GET per renderizzare la page Playlist Analyzer
 app.get('/plist-analyzer', checkAuthenticated, (req, res) => {
 	let spotifyApi=  new SpotifyWebApi({
 		clientId: spotify_client_id,
 		clientSecret: spotify_client_secret,
 	})
-	spotifyApi.setAccessToken(req.session.user.accessToken)
+	spotifyApi.setAccessToken(req.session.user.accessToken)	//Setto l'Access Token nel wrapper per poter effettuare le chiamate API a Spotify
 
-	spotifyApi.getUserPlaylists(req.session.user.id,{limit: 50}).then(data => {
+	spotifyApi.getUserPlaylists(req.session.user.id,{limit: 50}).then(data => {	//Chiedo a Spotify di restituirmi le playlist dell'utente (il cui id è ottenuto dalla sessione attualmente attiva) e ne limito il numero a 50
 
-		var playlists = data.body.items.filter(item=>item.tracks.total != 0)
+		var playlists = data.body.items.filter(item=>item.tracks.total != 0) //Elimino dalle playlist ottenute quelle che non hanno canzoni al loro interno
 		res.render('./pages/plist-analyzer.ejs', {playlists: playlists, p2sUser: {
 			username: req.session.user.name,
 			user_image: req.session.user.prof_pic
@@ -506,14 +508,14 @@ app.get('/plist-analyzer', checkAuthenticated, (req, res) => {
 	})
 })
 
-
+//Richiesta POST che chiama la funzione analyzePlaylist
 app.post('/plist-analyzer', (req, res) => {
 	let spotifyApi=  new SpotifyWebApi({
 		clientId: spotify_client_id,
 		clientSecret: spotify_client_secret,
 	})
-	spotifyApi.setAccessToken(req.session.user.accessToken)
-	spotifyUtils.analyzePlaylist(spotifyApi, req.body.playlistID).then(data => {
+	spotifyApi.setAccessToken(req.session.user.accessToken)	//Come sopra
+	spotifyUtils.analyzePlaylist(spotifyApi, req.body.playlistID).then(data => {	//Analizzo la playlist, il cui id si trova nel corpo della request, e restituisco il risultato al mittente
 		res.send(data)
 	})
 })

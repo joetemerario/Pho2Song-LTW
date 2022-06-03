@@ -1,11 +1,22 @@
+//Ogni volta che un check radio viene cliccato, questa funzione parte
 function showAnalysis(id, place, plist_name) {
-    $.ajax({
+    /*  VARIABILI IN INPUT ALLA FUNZIONE
+        id: id della playlist Spotify inviato al server nel corpo della richesta POST Ajax, utile alla funzione analyzePlaylist
+        place: variabile che vale 1 o 2, che identifica da quale delle 2 liste di playlist è stata invocata la funzione e di conseguenza permette di scegliere in quale sezione della pagina html mostrare i risultati dell'analisi
+        plist_name: nome della playlist utilizzato per mostrare dinamicamente sulla pagina html il nome della playlist che viene analizzata
+     */
+    $.ajax({    //Utilizzo JQuery per effettuare una chiamata Ajax asincrona, precisamente una POST che mi serve per inviare al server l'id della playlist da analizzare
         type: "post",
         url: "plist-analyzer",
         data: "playlistID=" + id,
         dataType: "json",
-        success: function (values) {
-            if ($("#sezione-risultato").css("display") == "none") {
+        success: function (values) {    //Quando il server mi invia la risposta accedo al corpo di quest'ultima per ottenre i dati che mi servono
+            /* 
+                In questa prima sezione accedo, sempre tramite JQuery, all'attributo style delle sezioni in cui mostrare i risultati dell'analisi
+                in base al valore di place ricevuto in input dalla funzione, e ne cambio il valore di display
+             */
+
+            if ($("#sezione-risultato").css("display") == "none") { 
                 $("#sezione-risultato").css("display", "initial");
             }
 
@@ -13,11 +24,16 @@ function showAnalysis(id, place, plist_name) {
                 $("#stats" + place).css("display", "initial");
             }
 
-            if (($("#aggiungi-scelta").css("display") == "none") && ($("#scelta2").css("display") == "none")) {
+            if (($("#aggiungi-scelta").css("display") == "none") && ($("#scelta2").css("display") == "none")) { //Qui mostro a schermo il tasto per far apparire la seconda lista di playlist nel caso in cui la funzione non fosse mai stata invocata con place = 2
                 $("#aggiungi-scelta").css("display", "initial");
             }
 
-            $("#plist" + place).html(plist_name);
+            $("#plist" + place).html(plist_name);   //Mostro dinamicamente il nome della playlist che l'utente ha deciso di analizzare
+
+            /* 
+                In questa sezione monto una stringa che contiene del codice html con all'interno delle progress bar che mostrano i valori che ho ottenuto dall'analisi della playlist
+                e la insersisco all'interno del li corrispondente alla statistica
+             */
             
             let string = ''
 
@@ -95,7 +111,7 @@ function showAnalysis(id, place, plist_name) {
     });
 }
 
-
+//Questa funzione si attiva alla pressione del tasto per far comparire la seconda lista di playlist e non fa altro che nascondere tale tasto e visualizzare la seconda lista
 function choosePlaylistToCompare() {
     document.getElementById("aggiungi-scelta").style.display = "none"
 
@@ -103,6 +119,8 @@ function choosePlaylistToCompare() {
 }
 
 /* Tooltips della Plist Analyzer page */
+
+//Si può vedere passando il puntatore sul tasto per far comparire la seconda lista di playlist
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)

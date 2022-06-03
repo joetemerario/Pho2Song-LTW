@@ -160,15 +160,23 @@ async function getSongFromColors(colors, songs, songsChosen) {
   return ret
 }
 
+//QUesta funzione viene eseguita lato server, al momento di una richeista POST sulla risorsa plist-analyzer
 async function analyzePlaylist(spotifyApi, playlistId) {
+  /* 
+    VARIABILI IN INPUT ALLA FUNZIONE
 
-  var data = await spotifyApi.getPlaylistTracks(playlistId, { limit: 100 })
+    spotifyApi: varibile che fa da wrapper per eseguire chiamate API a Spotify
+    playlistId: id Spotify della playlist da analizzare, passato a getPlaylistTracks
+   */
+
+  var data = await spotifyApi.getPlaylistTracks(playlistId, { limit: 100 }) //Chiedo a Spotify di estrarre gli oggetti "canzone" dalla playlist con id = playlistId
   var ids = Array()
 
-  for (let item of data.body.items) {
+  for (let item of data.body.items) { //Pusho all'interno di un array gli id delle canzoni ottenute dalla chiamata precendete
     ids.push(item.track.id);
   }
 
+  //Inizializzo le variabili che conterranno la media di ogni caratteristica del risultato
   let averageAcousticness = 0, countAcousticness = 0
   let averageDanceability = 0, countDanceability = 0
   let averageEnergy = 0, countEnergy = 0
@@ -178,8 +186,12 @@ async function analyzePlaylist(spotifyApi, playlistId) {
   let averageSpeechiness = 0, countSpeechiness = 0
   let averageTempo = 0, countTempo = 0
 
-  var data2 = await spotifyApi.getAudioFeaturesForTracks(ids)
+  var data2 = await spotifyApi.getAudioFeaturesForTracks(ids) //Chiedo a Spotify di estrarre le caratteristiche audio da una lista di canzoni precedentemente riempita con gli id di queste ultime
 
+  /* 
+    In questa sezione, per ogni traccia analizzata, aggiungo il valore di una caratteristica nella sua variabile corrispondente
+    non prima di averla riportata come un valore tra 0 e 100
+   */
   for (let track of data2.body.audio_features) {
     if (track !== undefined && track != null) {
       if (track.acousticness !== undefined && track.acousticness != null) {
@@ -217,7 +229,7 @@ async function analyzePlaylist(spotifyApi, playlistId) {
     }
   }
 
-
+  //Infine inserisco nell'oggetto di return la media di queste caratteristiche torncate alla seconda cifra decimale
   var ret = {
     Acousticness: (averageAcousticness / (countAcousticness)).toFixed(2),
     Danceability: (averageDanceability / (countDanceability)).toFixed(2),
