@@ -2,17 +2,17 @@ body{
     padding-top: 65px;
 }
 
-.imgtext{
+.imgtext{/* font del testo sull'immagine*/
     font-weight: bold;
     font-style: italic;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
-.imgg{
+.imgg{/* blur dell'immagine */
     filter: blur(2px);
     
 }
-.carousel-item img{
+.carousel-item img{/* crop dell'immagine */
     object-fit: cover;
     object-position:center;
     height:30vh;

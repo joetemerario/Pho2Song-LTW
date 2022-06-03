@@ -22,17 +22,16 @@
             <h2 class="text-center pb-md-5" > Ecco le tue canzoni </h3>
         </div>
         <div class="row  justify-content-evenly">
-            
-                <div class="col-md-4 order-md-first order-last">
-                    
+            <!-- div della form -->
+            <div class="col-md-4 order-md-first order-last">
+                    <!-- form contenente list items con checkbox e modal per la submit -->
                     <form action="/playlist" method="post">
                         <div class="row justify-content-center">
                             <div class="col-lg-8 col-md-10 mx-0 text-center">
-                                <!-- mx-auto col-lg-6 col-md-8 -->
                                 <div class="form-row">
                                     <ul id="songsList" class="list-group list-group-flush justify-content-center align-items-center"> 
                                         <% var i=0 %>
-                                        <% while(i<num){ %>
+                                        <% while(i<num){ %><!-- genero list item in numero pari alle foto-->
                                             <li id="li<%=i %>" class="list-group-item px-0" style="display: none;">
                                                 <div class="d-flex justify-content-center">
                                                     <div id="spin<%=i %>"  class="spinner-border" role="status"  style="display: none">
@@ -43,6 +42,7 @@
                                                     <div class="col-1 px-0">
                                                         <input class="form-check-input mt-0" name="songs" type="checkbox" id="check<%=i %>" value="" aria-label="<%=i %>" checked onclick='checkValid(this.id)'>
                                                     </div>
+                                                    <!-- qui viene aggiunto l'iframe per la i-esima canzone -->
                                                 </div>
                                             </li>
                                         <%i++%>
@@ -51,6 +51,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -74,6 +75,7 @@
                                             *Obbligatorio
                                         </div>
                                         <button type="button" class="btn btn-dark btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <!-- tasto submit chiuso all'interno del modal -->
                                         <button type="submit" class="btn btn-dark btn-primary">Save</button>
                                     </div>
                                 </div>
@@ -92,6 +94,7 @@
                                     <button type="button" id="masterCheck" class="btn btn-outline-secondary"  onclick="checkAll()">Seleziona tutte</button>
                                 </div>
                                 <div class="col-12 mx-auto px-0">
+                                    <!-- tasto di apertura del modal -->
                                     <button  id="submitmodal" type="button" class="btn  btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Salva questa playlist
                                     </button>
@@ -99,9 +102,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
             
-            
+            <!-- div contenente carosello delle immagini e testo esplicativo della funzionalità -->
             <div class="col-md-4 order-md-last order-first mb-3">
                 <ul class="list-group list-group-flush">
                     <!-- Carousel -->
@@ -109,7 +112,7 @@
                         <div class="carousel-inner align-items-center justify-content-center rounded-2">
                         <% var flag= true%>
                         <% var i=0 %> 
-                        <% if(urls)urls.forEach(element => { %>
+                        <% if(urls)urls.forEach(element => { %> <!--inserisco nel carosello le foto-->
                         <% if (flag) { %>
                             <div class="carousel-item active text-center  justify-content-center rounded-1">
                                 <img src="<%=element%>" class="imgg d-block w-100 rounded-2" alt="...">
