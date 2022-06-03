@@ -38,7 +38,7 @@ escludendo i dettagli
         input.ejs
         landing_page.ejs
         login.ejs
-        playlist_history.ejs
+        plist-history.ejs
         plist-analizer.ejs
         result.ejs
     > partials

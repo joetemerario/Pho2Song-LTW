@@ -498,10 +498,10 @@ app.listen(8888, () => {
 
 /************** Funzionalità: Playlist History ******************* */
 
-app.get('/playlist_history', checkAuthenticated, (req, res) => {
+app.get('/plist-history', checkAuthenticated, (req, res) => {
 	couch.get(dbName, viewUrl ).then(
         (data, headers, status) => {
-			res.render('./pages/playlist_history.ejs', {
+			res.render('./pages/plist-history.ejs', {
 				p2sUser: {
 					username: req.session.user.name,
 					id: req.session.user.id,
