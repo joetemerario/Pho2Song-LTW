@@ -39,7 +39,7 @@ escludendo i dettagli
         landing_page.ejs
         login.ejs
         plist-history.ejs
-        plist-analizer.ejs
+        plist-analyzer.ejs
         result.ejs
     > partials
         footer.ejs
