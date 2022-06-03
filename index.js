@@ -322,7 +322,7 @@ app.post('/result',upload.array("images", 50), checkAuthenticated, function (req
 		photos: Array(),
 		names: Array(),
 		songsDB: Array(),
-		songsChosen: Array()
+		songsChosen: Array() //array contenente tutte le canzoni che sono state scelte durante l'analisi dell'album fotografico
 	})
 	p2sUser={
 		username: req.session.user.name,
@@ -414,7 +414,26 @@ app.post('/playlist', checkAuthenticated, function (req, res) {
 	
 	songsDB=songsDB.filter(songImg => selectedSongs.includes(songImg.song.uri)) // filtro le canzoni in base alle canzoni che l'utente ha selezionato
 
+	/* Struttura di un documento (playlist) nel database:
 
+	{
+		_id: id del documento 
+		name: nome della playlist
+		user: id dell'utente che possiede questa playlist
+		description: descrizione della playlist
+		song_number: numero di canzoni nella playlist
+		songs: [
+			{
+				song: {
+					uri: uri della canzone
+					name: nome della canzone
+				}
+				photo: foto correlata alla canzone 
+			}
+		]
+	}
+
+	*/
 
 	couch.uniqid().then((ids) => {
         const id = ids[0]
